@@ -1,0 +1,28 @@
+﻿<Window x:Class="ExercisePlanner.AddEditExerciseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add/Edit Exercise" Height="300" Width="400">
+    <Grid>
+        <TextBlock Text="Exercise Name:" VerticalAlignment="Top" Margin="10,10,0,0"/>
+        <TextBox x:Name="ExerciseNameTextBox" VerticalAlignment="Top" Margin="10,30,10,0" Width="360"/>
+
+        <TextBlock Text="Category:" VerticalAlignment="Top" Margin="10,70,0,0"/>
+        <TextBox x:Name="CategoryTextBox" VerticalAlignment="Top" Margin="10,90,10,0" Width="360"/>
+
+        <TextBlock Text="Reps:" VerticalAlignment="Top" Margin="10,130,0,0"/>
+        <TextBox x:Name="RepsTextBox" VerticalAlignment="Top" Margin="10,150,10,0" Width="360"/>
+
+        <TextBlock Text="Day:" VerticalAlignment="Top" Margin="10,190,0,0"/>
+        <ComboBox x:Name="DayComboBox" VerticalAlignment="Top" Margin="10,210,10,0" Width="360">
+            <ComboBoxItem Content="Monday"/>
+            <ComboBoxItem Content="Tuesday"/>
+            <ComboBoxItem Content="Wednesday"/>
+            <ComboBoxItem Content="Thursday"/>
+            <ComboBoxItem Content="Friday"/>
+            <ComboBoxItem Content="Saturday"/>
+            <ComboBoxItem Content="Sunday"/>
+        </ComboBox>
+
+        <Button Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Width="80" Click="SaveButton_Click"/>
+    </Grid>
+</Window>
