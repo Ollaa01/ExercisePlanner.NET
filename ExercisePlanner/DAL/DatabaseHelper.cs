@@ -13,8 +13,6 @@ namespace ExercisePlanner.DAL
 { 
     public class DatabaseHelper
     {
-        //private const string ConnectionString = @"Data Source=C:\Users\kaboo\OneDrive\Pulpit\ExercisePlanner.NET\ExercisePlanner\Database\exercisePlanner.db;Version=3;";
-        //private const string ConnectionString = @"Host=localhost;Port=5432;Username=postgres;Password=3435;Database=exercise_planner;";
         private const string ConnectionString = @"Host=ep-dark-hill-a9itn34i-pooler.gwc.azure.neon.tech;Port=5432;Username=neondb_owner;Password=npg_Ro5UeJpL6nQC;Database=neondb";
 
         public class SamplePlan
