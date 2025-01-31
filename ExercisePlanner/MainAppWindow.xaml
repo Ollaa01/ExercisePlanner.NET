@@ -1,28 +1,50 @@
 ﻿<Window x:Class="ExercisePlanner.MainAppWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Exercise Planner" Height="450" Width="700">
-    <Grid>
-        <!-- Welcome Message -->
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Margin="0,10,0,0" 
-                   Text="{Binding WelcomeMessage}" />
+        Title="Exercise Planner" Height="600" Width="800" Background="#E0F7FA">
+    <Grid Margin="20">
 
-        <!-- Days of the Week View -->
-        <TabControl x:Name="DaysTabControl" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,40,10,60">
-            <TabItem Header="Monday" />
-            <TabItem Header="Tuesday" />
-            <TabItem Header="Wednesday" />
-            <TabItem Header="Thursday" />
-            <TabItem Header="Friday" />
-            <TabItem Header="Saturday" />
-            <TabItem Header="Sunday" />
+        <TabControl x:Name="DaysTabControl" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="20"
+                    SelectionChanged="DaysTabControl_SelectionChanged" Background="White" BorderBrush="#00796B" BorderThickness="2">
+            
+            <TabItem Header="Monday" Tag="Monday" />
+            <TabItem Header="Tuesday" Tag="Tuesday" />
+            <TabItem Header="Wednesday" Tag="Wednesday" />
+            <TabItem Header="Thursday" Tag="Thursday" />
+            <TabItem Header="Friday" Tag="Friday" />
+            <TabItem Header="Saturday" Tag="Saturday" />
+            <TabItem Header="Sunday" Tag="Sunday" />
         </TabControl>
 
-        <!-- Action Buttons -->
+        <DataGrid x:Name="ExercisesDataGrid" AutoGenerateColumns="False" Margin="10,50,10,80" IsReadOnly="True" 
+                  Background="#B2EBF2" BorderBrush="#00796B" BorderThickness="2" 
+                  RowBackground="White" AlternatingRowBackground="#E0F7FA">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#00796B" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="BorderBrush" Value="#004D40" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Exercise Name" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="*" />
+                <DataGridTextColumn Header="Sets" Binding="{Binding Sets}" Width="Auto" />
+                <DataGridTextColumn Header="Reps" Binding="{Binding Reps}" Width="Auto" />
+            </DataGrid.Columns>
+        </DataGrid>
+
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
-            <Button Content="Add" Width="100" Margin="10" Click="AddExerciseButton_Click" />
-            <Button Content="Edit" Width="100" Margin="10" Click="EditExerciseButton_Click" />
-            <Button Content="Delete" Width="100" Margin="10" Click="DeleteExerciseButton_Click" />
+            <Button Content="Add" Width="120" Margin="10" Click="AddExerciseButton_Click" Background="White" Foreground="#00796B" BorderBrush="#004D40" BorderThickness="2" FontSize="16" FontWeight="SemiBold"/>
+            <Button Content="Edit" Width="120" Margin="10" Click="EditExerciseButton_Click" Background="White" Foreground="#00796B" BorderBrush="#004D40" BorderThickness="2" FontSize="16" FontWeight="SemiBold"/>
+            <Button Content="Delete" Width="120" Margin="10" Click="DeleteExerciseButton_Click" Background="White" Foreground="#00796B" BorderBrush="#004D40" BorderThickness="2" FontSize="16" FontWeight="SemiBold"/>
+            <Button Content="Check plans" Width="140" Margin="10" Click="CheckPlansButton_Click" Background="White" Foreground="#00796B" BorderBrush="#004D40" BorderThickness="2" FontSize="16" FontWeight="SemiBold"/>
         </StackPanel>
+        <Button Content="Log out" Width="60" Height="30" 
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    Background="#00796B" Foreground="White" FontSize="14" 
+                    FontWeight="Bold" Click="LogOutButton_Click" Margin="0,0,0, 5"/>
     </Grid>
 </Window>

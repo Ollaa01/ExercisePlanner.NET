@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace ExercisePlanner
 {
-    /// <summary>
-    /// Logika interakcji dla klasy RegisterWindow.xaml
-    /// </summary>
+
     public partial class RegisterWindow : Window
     {
         public RegisterWindow()
@@ -32,12 +30,12 @@ namespace ExercisePlanner
 
             string result = DatabaseHelper.RegisterUser(username, password);
 
-            // Sprawdzamy komunikat zwrócony przez RegisterUser
+
             if (result == "Registration successful.")
             {
                 MessageBox.Show(result, "Succesfull. Please now log into account.");
-                MainWindow mainWindow = new MainWindow(); // Przekazujemy zalogowanego użytkownika
-                mainWindow.Show(); // Pokazujemy główne okno
+                MainWindow mainWindow = new MainWindow(); 
+                mainWindow.Show(); 
 
             }
             

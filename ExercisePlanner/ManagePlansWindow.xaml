@@ -1,0 +1,73 @@
+﻿<Window x:Class="ExercisePlanner.ManagePlansWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Manage Plans" Height="450" Width="800" Background="#E0F7FA">
+    <Grid Margin="10,10,10,45">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="0" Margin="20">
+            <TabControl>
+                <TabItem Header="Sample Plans">
+                    <StackPanel>
+                        <DataGrid x:Name="PlansDataGrid" AutoGenerateColumns="True" 
+                                  Margin="10" CanUserAddRows="False" IsReadOnly="True" FontSize="14" 
+                                  BorderBrush="#00796B" BorderThickness="2" 
+                                  Background="#B2EBF2" RowBackground="White" AlternatingRowBackground="#E0F7FA">
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="#00796B" />
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="BorderBrush" Value="#004D40" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Sample Exercises">
+                    <StackPanel>
+                        <DataGrid x:Name="ExercisesDataGrid" AutoGenerateColumns="True" Margin="10" 
+                                  CanUserAddRows="False" IsReadOnly="True" FontSize="14" 
+                                  BorderBrush="#00796B" BorderThickness="2" 
+                                  Background="#B2EBF2" RowBackground="White" AlternatingRowBackground="#E0F7FA">
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="#00796B" />
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="BorderBrush" Value="#004D40" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </ScrollViewer>
+
+        <!-- New grid for buttons in row 1 -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Grid.Column="0">
+                <Button Content="Add Plan" Width="120" Background="White" Foreground="#00796B" BorderBrush="#004D40" BorderThickness="2" FontSize="14" FontWeight="SemiBold" Margin="5" Click="AddSamplePlan"/>
+                <Button Content="Edit Plan" Width="120" Background="White" Foreground="#00796B" BorderBrush="#004D40" BorderThickness="2" FontSize="14" FontWeight="SemiBold" Margin="5" Click="EditSamplePlan"/>
+                <Button Content="Delete Plan" Width="120" Background="White" Foreground="#00796B" BorderBrush="#004D40" BorderThickness="2" FontSize="14" FontWeight="SemiBold" Margin="5" Click="DeleteSamplePlan"/>
+                <Button Content="Add Exercise" Width="120" Background="White" Foreground="#00796B" BorderBrush="#004D40" BorderThickness="2" FontSize="14" FontWeight="SemiBold" Margin="5" Click="AddSampleExercise"/>
+                <Button Content="Edit Exercise" Width="120" Background="White" Foreground="#00796B" BorderBrush="#004D40" BorderThickness="2" FontSize="14" FontWeight="SemiBold" Margin="5" Click="EditSampleExercise"/>
+                <Button Content="Delete Exercise" Width="120" Background="White" Foreground="#00796B" BorderBrush="#004D40" BorderThickness="2" FontSize="14" FontWeight="SemiBold" Margin="5" Click="DeleteSampleExercise"/>
+            </StackPanel>
+        </Grid>
+        <Button Content="Close" Width="60" Height="30" 
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    Background="#00796B" Foreground="White" FontSize="14" 
+                    FontWeight="Bold" Click="CloseButton_Click" Margin="0,0,0,-35" Grid.Row="1"/>
+    </Grid>
+</Window>

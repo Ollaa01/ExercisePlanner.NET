@@ -1,0 +1,20 @@
+﻿<Window x:Class="ExercisePlanner.EditPlanWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit Plan" Height="350" Width="400" Background="#E0F7FA">
+    <StackPanel Margin="10">
+
+        <TextBlock Text="Plan Name" Margin="0 10 0 5" />
+        <TextBox x:Name="PlanNameTextBox" Margin="0 0 0 10" FontSize="14" BorderBrush="#00796B" BorderThickness="2" Padding="5"/>
+
+        <TextBlock Text="Plan Description" Margin="0 10 0 5" />
+        <TextBox x:Name="DescriptionTextBox" Margin="0 0 0 10" FontSize="14" BorderBrush="#00796B" BorderThickness="2" Padding="5"/>
+
+        <TextBlock Text="Sample Exercises ID" Margin="0 10 0 5" />
+        <TextBox x:Name="SampleExercisesTextBox" Margin="0 0 0 10" FontSize="14" BorderBrush="#00796B" BorderThickness="2" Padding="5"/>
+
+        <Button Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,10,10" Width="80" 
+                Background="#00796B" Foreground="White" FontSize="14" FontWeight="SemiBold" BorderBrush="#004D40" BorderThickness="2" 
+                Padding="5" Click="SaveButton_Click"/>
+    </StackPanel>
+</Window>

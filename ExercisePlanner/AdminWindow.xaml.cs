@@ -14,11 +14,10 @@ namespace ExercisePlanner
             LoadUsers();
         }
 
-        // Ładowanie użytkowników do DataGrid
         private void LoadUsers()
         {
             var users = DatabaseHelper.GetAllUsers();
-            UsersDataGrid.ItemsSource = users; // Przypisz listę obiektów User
+            UsersDataGrid.ItemsSource = users; 
         }
 
         private void AddUserButton_Click(object sender, RoutedEventArgs e)
@@ -26,7 +25,6 @@ namespace ExercisePlanner
             string username = UsernameTextBox.Text.Trim();
             string password = PasswordBox.Password.Trim();
 
-            // Sprawdź, czy wybrano rolę
             if (RoleComboBox.SelectedItem is not ComboBoxItem selectedRoleItem)
             {
                 MessageBox.Show("Please select a role.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -45,7 +43,7 @@ namespace ExercisePlanner
 
             if (result == "User added successfully.")
             {
-                LoadUsers(); // Odśwież dane po dodaniu
+                LoadUsers(); 
             }
         }
 
@@ -78,7 +76,7 @@ namespace ExercisePlanner
 
             if (result == "User modified successfully.")
             {
-                LoadUsers(); // Odśwież dane po edytowaniu
+                LoadUsers(); 
             }
         }
 
@@ -90,7 +88,6 @@ namespace ExercisePlanner
                 return;
             }
 
-            // Potwierdzenie usunięcia użytkownika
             var confirmResult = MessageBox.Show($"Are you sure you want to delete user '{selectedUser.Username}'?",
                                                 "Confirm Delete",
                                                 MessageBoxButton.YesNo,
@@ -106,8 +103,22 @@ namespace ExercisePlanner
 
             if (result == "User deleted successfully.")
             {
-                LoadUsers(); // Odśwież dane po usunięciu
+                LoadUsers(); 
             }
+        }
+
+        private void SamplesButton_Click(object sender, RoutedEventArgs e)
+        {
+            ManagePlansWindow plansWindow = new ManagePlansWindow();
+            plansWindow.Show();
+            Close();
+        }
+
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
         }
     }
 }

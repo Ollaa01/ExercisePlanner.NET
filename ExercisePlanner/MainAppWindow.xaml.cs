@@ -18,20 +18,18 @@ namespace ExercisePlanner
         {
             InitializeComponent();
             CurrentUser = loggedInUser;
+            DataContext = this;
 
-            DataContext = this; // Binding dla WelcomeMessage
-            LoadExercises();
+            DaysTabControl.SelectedIndex = 0;
         }
 
-        private void LoadExercises()
+        public void LoadExercises()
         {
             try
             {
                 int userId = CurrentUser.Id;
                 var exercises = DatabaseHelper.GetExercisesByUser(userId);
 
-                // Wypełnianie zakładek danymi
-                PopulateTabControl(exercises);
             }
             catch (Exception ex)
             {
@@ -39,29 +37,6 @@ namespace ExercisePlanner
             }
         }
 
-        private void PopulateTabControl(IEnumerable<Exercise> exercises)
-        {
-            foreach (TabItem tab in DaysTabControl.Items)
-            {
-                string day = tab.Header.ToString();
-                var exercisesForDay = exercises
-                    .Where(e => e.Day.Equals(day, StringComparison.OrdinalIgnoreCase))
-                    .Select(e => new
-                    {
-                        DisplayText = $"{e.Name} - {e.Category} - Powtórzenia: {e.Reps}",
-                        OriginalExercise = e
-                    });
-
-                var listBox = new ListBox
-                {
-                    ItemsSource = exercisesForDay,
-                    DisplayMemberPath = "DisplayText", // Wyświetlane teksty
-                    Tag = day
-                };
-
-                tab.Content = listBox; // Przypisanie ListBox jako zawartości zakładki
-            }
-        }
 
 
 
@@ -76,14 +51,12 @@ namespace ExercisePlanner
 
         private void EditExerciseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DaysTabControl.SelectedItem is TabItem selectedTab &&
-                selectedTab.Content is ListBox listBox &&
-                listBox.SelectedItem is Exercise selectedExercise)
+            if (ExercisesDataGrid.SelectedItem is Exercise selectedExercise) 
             {
                 var editWindow = new AddEditExerciseWindow(CurrentUser.Id, selectedExercise);
                 if (editWindow.ShowDialog() == true)
                 {
-                    LoadExercises();
+                    LoadExercises(); 
                 }
             }
             else
@@ -92,11 +65,10 @@ namespace ExercisePlanner
             }
         }
 
+
         private void DeleteExerciseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DaysTabControl.SelectedItem is TabItem selectedTab &&
-                selectedTab.Content is ListBox listBox &&
-                listBox.SelectedItem is Exercise selectedExercise)
+            if (ExercisesDataGrid.SelectedItem is Exercise selectedExercise) 
             {
                 var result = MessageBox.Show($"Are you sure you want to delete {selectedExercise.Name}?", "Confirm Delete",
                     MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -106,7 +78,7 @@ namespace ExercisePlanner
                     try
                     {
                         DatabaseHelper.DeleteExercise(selectedExercise.Id);
-                        LoadExercises();
+                        LoadExercises(); 
                     }
                     catch (Exception ex)
                     {
@@ -118,6 +90,43 @@ namespace ExercisePlanner
             {
                 MessageBox.Show("Please select an exercise to delete.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+        private void CheckPlansButton_Click(object sender, RoutedEventArgs e)
+        {
+            PlansWindow plansWindow = new PlansWindow(CurrentUser, this);
+            plansWindow.Show();
+            Close();
+        }
+        private void DaysTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DaysTabControl.SelectedItem is TabItem selectedTab)
+            {
+                string selectedDay = selectedTab.Tag.ToString();
+                LoadExercisesForDay(selectedDay);
+            }
+        }
+
+        private void LoadExercisesForDay(string day)
+        {
+            try
+            {
+                int userId = CurrentUser.Id;
+                var exercises = DatabaseHelper.GetExercisesByUser(userId)
+                    .Where(e => e.Day.Equals(day, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                ExercisesDataGrid.ItemsSource = exercises; 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to load exercises: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
         }
     }
 }

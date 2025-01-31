@@ -10,12 +10,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static ExercisePlanner.DAL.DatabaseHelper;
+///
+using Npgsql;
 
 namespace ExercisePlanner
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -34,16 +34,15 @@ namespace ExercisePlanner
             {
                 if (loggedInUser.Role == "Admin")
                 {
-                    AdminWindow adminWindow = new AdminWindow(); // Tworzymy obiekt okna administratora
-                    adminWindow.Show(); // Pokazujemy okno administratora
+                    AdminWindow adminWindow = new AdminWindow();
+                    adminWindow.Show();
                 }
                 else
                 {
-                    MainAppWindow mainAppWindow = new MainAppWindow(loggedInUser); // Przekazujemy zalogowanego użytkownika
-                    mainAppWindow.Show(); // Pokazujemy główne okno
+                    MainAppWindow mainAppWindow = new MainAppWindow(loggedInUser);
+                    mainAppWindow.Show();
                 }
 
-                // Zamknij okno logowania (MainWindow)
                 this.Close();
             }
             else
@@ -56,12 +55,14 @@ namespace ExercisePlanner
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            // Otwórz okno rejestracji
+
             RegisterWindow registerWindow = new RegisterWindow();
             registerWindow.Show();
 
-            // Zamknij okno logowania (MainWindow)
             this.Close();
         }
-    }
+
+
+        }
+    
 }

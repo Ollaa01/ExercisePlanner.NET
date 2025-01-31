@@ -1,23 +1,11 @@
 ﻿using ExercisePlanner.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using static ExercisePlanner.DAL.DatabaseHelper;
 
 namespace ExercisePlanner
 {
-
-    public partial class AddEditExerciseWindow : Window
+    public partial class EditExerciseWindow : Window
     {
         public string ExerciseName => ExerciseNameTextBox.Text;
         public string Category => CategoryTextBox.Text;
@@ -27,20 +15,17 @@ namespace ExercisePlanner
         public string Day => (DayComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
 
         public int UserId { get; private set; }
-        public Exercise ExistingExercise { get; private set; }
+        public SampleExercise ExistingExercise { get; private set; }
 
-
-        public AddEditExerciseWindow(int userId)
+        public EditExerciseWindow()
         {
             InitializeComponent();
-            UserId = userId;
         }
 
-        public AddEditExerciseWindow(int userId, Exercise exerciseToEdit)
+        public EditExerciseWindow(SampleExercise exerciseToEdit)
         {
             InitializeComponent();
-            UserId = userId;
-            ExistingExercise = exerciseToEdit;
+            ExistingExercise = exerciseToEdit; 
 
             ExerciseNameTextBox.Text = exerciseToEdit.Name;
             CategoryTextBox.Text = exerciseToEdit.Category;
@@ -56,6 +41,7 @@ namespace ExercisePlanner
             }
         }
 
+
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(ExerciseName) || string.IsNullOrWhiteSpace(Day))
@@ -68,7 +54,7 @@ namespace ExercisePlanner
             {
                 try
                 {
-                    DatabaseHelper.AddExercise(UserId, ExerciseName, Category, Reps, Sets, Day);
+                    DatabaseHelper.AddSampleExercise(ExerciseName, Category, Reps, Sets, Day);
                     DialogResult = true; 
                 }
                 catch (Exception ex)
@@ -80,7 +66,7 @@ namespace ExercisePlanner
             {
                 try
                 {
-                    DatabaseHelper.EditExercise(ExistingExercise.Id, ExerciseName, Category, Reps, Sets, Day);
+                    DatabaseHelper.UpdateSampleExercise(ExistingExercise.Id, ExerciseName, Category, Reps, Sets, Day);
                     DialogResult = true; 
                 }
                 catch (Exception ex)
@@ -93,4 +79,7 @@ namespace ExercisePlanner
         }
 
     }
+
+
 }
+
